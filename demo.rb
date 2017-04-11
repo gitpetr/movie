@@ -29,7 +29,7 @@ puts "\t - Cтатистика по годам"
 listfilms.stats(:year).first(5).each{|k, v|  listfilms.print_stats(k, v)  }
 puts
 puts "\t - Статистика по месяцам"
-listfilms.stats(:month).each{|k, v| listfilms.print_stats(MANTH[k.to_i-1].to_s, v) }
+listfilms.stats(:month).each{|k, v| listfilms.print_stats(MANTH[k.to_i-1], v) }
 puts
 begin
 puts("\t - Жанр фильма?")  
