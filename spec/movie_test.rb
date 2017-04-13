@@ -3,44 +3,62 @@ require 'csv'
 require_relative '../movie_collection'
 TITRES = %i[link name  year country date  genre duratation rating director actors]
 require_relative '../movie'
-MANTH = %i[Январь Февраль Март Апрель Май Июнь Июль Август Сентябрь Октябрь Ноябрь Декабрь]
-
-@films = ARGV[0] || "../movies.txt"
-
+ 
 RSpec.describe MovieCollection  do 
-  listfilms =  MovieCollection.new("../movies.txt")
-  describe 'Показать список всех фильмов' do 
-    it "return count films" do
-      @allfilms = CSV.read("../movies.txt", col_sep: '|', headers: TITRES ).map{ |f| Movie.new(self, f.to_h) }
-      expect( @allfilms.count).to eq 250
-    end
+  let(:listfilms) {  MovieCollection.new("../movies.txt") }
+  
+  describe '#all' do 
+    subject { listfilms.all }
+    it { is_expected 
+        .to have_attributes(count: 250)
+        .and all be_an_instance_of(Movie)
+      }
   end
   
-  describe "Сортировка по полю" do 
-    it 'listfilms.sortby(:year).first' do 
-      film = listfilms.sortby(:year).first
-      expect(film.year ).to eq 1921
-    end
+  describe "#sortby" do 
+    subject { listfilms.sortby(:year).first.year }
+    it { is_expected.to eq(1921) }
   end
 
-  describe "actors" do 
-    it "in firs film" do 
-      film = listfilms.actors.first
-      expect(film).to match_array(["Bob Gunton", "Morgan Freeman", "Tim Robbins"])
-    end
+  describe "#actors" do 
+    subject { listfilms.actors.first }
+    it { is_expected.to match_array(["Bob Gunton", "Morgan Freeman", "Tim Robbins"])}
   end
 
-  describe 'статистика' do 
-    it 'режиссеров' do 
-      director = listfilms.stats(:director).sort.first(1).each{|k, v| listfilms.print_stats(k, v) }
-      expect(director).to match a_hash_including ["Allen Woody", 1]
-    end
+  describe '#stats' do 
+    context "по режиссерам" do
+      subject { listfilms.stats(:director) }
+      it { is_expected.to include("Zemeckis Robert" => 2) }
+    end 
+
+    context "по году" do
+      subject { listfilms.stats(:year) }
+      it { is_expected.to include(2010 => 7) }
+    end 
+
+    context "по актерам" do
+      subject { listfilms.stats(:actors) }
+      it { is_expected.to include("Al Pacino" => 5) }
+    end 
+
+    context "по незнакомому полю" do
+      subject { listfilms.stats(:produsser) }
+      it { expect { subject }.to raise_error(NoMethodError) }
+    end 
+
+    context "по месяцам" do
+      subject { listfilms.stats(:month) }
+      it { is_expected.to include("12" => 30) }
+    end 
+
   end
 
-  describe 'Фильтр по параметрам' do 
-    it "years, genre, acters" do 
-       filtr = listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| f.to_s }
-       expect(filtr[0].director).to  eq "Nolan Christopher"
-    end
+  describe '#filter' do 
+      subject { listfilms.filter( year: (1945..2010),
+                                  genre: /Sci-Fi|Comedy|Romance|Drama/,
+                                  actors: /Johansson|Elizabeth|Julie Delpy/ ).first }
+      it { is_expected.to have_attributes(:year => 2006,
+                                          :genre => ["Drama", "Mystery", "Thriller"],
+                                          :actors => ["Christian Bale", "Hugh Jackman", "Scarlett Johansson"]) }
   end
 end
