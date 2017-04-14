@@ -59,4 +59,3 @@ puts
 puts "\t - Фильтр: listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy/, director: /Zemeckis Robert|Cameron James/ )"
 listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| f.to_s }
  
-puts "\t - Список всех фильмов(listfilms.alls)"
