@@ -37,5 +37,23 @@ class MovieCollection
   def filter(filters) 
     @allfilms.select{ |f| f.match_filter?(filters) } 
   end
-  
+
+  def period
+    {  ancient: (1900..1945), classic: (1945..1968), modern: (1968..2000), new: (2000..Time.now.year) }
+  end
+
+  def typofperiod period
+    director = 'неизвестный'
+    case period
+    when :ancient then 
+      "старый фильм"
+    when :classic then 
+      "классический фильм"
+    when :modern then 
+      "современное кино"
+    when :new then 
+      "новинка"
+    end
+  end
+   
 end

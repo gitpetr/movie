@@ -4,6 +4,7 @@ require 'date'
 require_relative 'movie_collection'
 TITRES = %i[link name  year country date  genre duratation rating director actors]
 require_relative 'movie'
+require_relative './netflix/netflix'
 MANTH = %i[Январь Февраль Март Апрель Май Июнь Июль Август Сентябрь Октябрь Ноябрь Декабрь]
 
 @films = ARGV[0] || "./movies.txt"
@@ -52,4 +53,7 @@ puts listfilms.genries
 puts
 puts "\t - Фильтр: listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy/, director: /Zemeckis Robert|Cameron James/ )"
 listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| f.to_s }
- 
+
+puts "name"
+netflix =  Netflix.new(@films)
+netflix.show(period: :classic, genre: /Sci-Fi|Comedy|Romance|Drama/)

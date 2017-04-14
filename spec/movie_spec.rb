@@ -1,4 +1,5 @@
 require 'rspec'
+require 'rspec/its'
 require 'csv' 
 require_relative '../movie_collection'
 TITRES = %i[link name  year country date  genre duratation rating director actors]
@@ -9,20 +10,18 @@ RSpec.describe MovieCollection  do
   
   describe '#all' do 
     subject { listfilms.all }
-    it { is_expected 
-        .to have_attributes(count: 250)
-        .and all be_an_instance_of(Movie)
-      }
+    its(:count) { is_expected.to eq(250) }
+    it { is_expected.to all be_an_instance_of(Movie)}
   end
   
   describe "#sortby" do 
-    subject { listfilms.sortby(:year).first.year }
-    it { is_expected.to eq(1921) }
+    subject { listfilms.sortby(:year).first }
+    its(:year) { is_expected.to eq(1921) }
   end
 
   describe "#actors" do 
-    subject { listfilms.actors.first }
-    it { is_expected.to match_array(["Bob Gunton", "Morgan Freeman", "Tim Robbins"])}
+    subject { listfilms.actors }
+    its(:first) { is_expected.to match_array(["Bob Gunton", "Morgan Freeman", "Tim Robbins"])}
   end
 
   describe '#stats' do 

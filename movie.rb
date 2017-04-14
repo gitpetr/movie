@@ -33,4 +33,13 @@ class Movie
       field = self.send(k)
       field.is_a?(Array) ?  field.any?{ |acter| v === acter } : v ===  field }
   end
+
+  def classic
+    (1945..1968)
+  end
+
+  def ancient 
+    (1900..1945)
+  end
+
 end
