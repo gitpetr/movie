@@ -1,0 +1,3 @@
+class  ClassicMovie < Movie
+  #
+end

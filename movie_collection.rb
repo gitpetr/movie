@@ -6,8 +6,22 @@ class MovieCollection
     unless File.exist?(filmfile)  
       abort " Такого файла не существует"
     end
-    @allfilms = CSV.read(filmfile, col_sep: '|', headers: TITRES ).map{ |f| Movie.new(self, f.to_h) }
+    #@allfilms = CSV.read(filmfile, col_sep: '|', headers: TITRES ).map{ |f| Movie.new(self, f.to_h) }
+    @allfilms  = CSV.read(filmfile, col_sep: '|', headers: TITRES ).map{ |f| create(:year) }
     @genries = genres
+  end
+
+  def create year
+    case year
+    when (1900..1945) then 
+      AncientMovie.new(self, f.to_h)
+    when (1945..1968) then 
+      ClassicMovie.new(self, f.to_h)
+    when (1968..2000) then 
+      ModernMovie.new(self, f.to_h)
+    when (2000..Time.now.year) then 
+      NewMovie.new(self, f.to_h)
+    end
   end
 
   def all

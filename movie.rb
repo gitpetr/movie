@@ -15,6 +15,8 @@ class Movie
     @collection = owner 
   end
 
+
+
   def has_genre? genre 
      raise  "Извините! Вы ошиблись, такого жанра нет" unless @collection.genries.include?(genre)
      @genre.include?(genre)
@@ -33,13 +35,5 @@ class Movie
       field = self.send(k)
       field.is_a?(Array) ?  field.any?{ |acter| v === acter } : v ===  field }
   end
-
-  def classic
-    (1945..1968)
-  end
-
-  def ancient 
-    (1900..1945)
-  end
-
+ 
 end

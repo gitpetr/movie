@@ -1,0 +1,3 @@
+class NewMovie < Movie
+  #
+end
