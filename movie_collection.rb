@@ -6,21 +6,20 @@ class MovieCollection
     unless File.exist?(filmfile)  
       abort " Такого файла не существует"
     end
-    #@allfilms = CSV.read(filmfile, col_sep: '|', headers: TITRES ).map{ |f| Movie.new(self, f.to_h) }
-    @allfilms  = CSV.read(filmfile, col_sep: '|', headers: TITRES ).map{ |f| create(:year) }
+    @allfilms = CSV.read(filmfile, col_sep: '|', headers: TITRES ).map{ |f| create(f.to_h[:year].to_i).new(self, f.to_h) }
     @genries = genres
   end
 
   def create year
     case year
     when (1900..1945) then 
-      AncientMovie.new(self, f.to_h)
+      AncientMovie 
     when (1945..1968) then 
-      ClassicMovie.new(self, f.to_h)
+      ClassicMovie 
     when (1968..2000) then 
-      ModernMovie.new(self, f.to_h)
+      ModernMovie 
     when (2000..Time.now.year) then 
-      NewMovie.new(self, f.to_h)
+      NewMovie 
     end
   end
 
@@ -52,22 +51,8 @@ class MovieCollection
     @allfilms.select{ |f| f.match_filter?(filters) } 
   end
 
-  def period
-    {  ancient: (1900..1945), classic: (1945..1968), modern: (1968..2000), new: (2000..Time.now.year) }
+  def alls
+    @allfilm
   end
-
-  def typofperiod period
-    director = 'неизвестный'
-    case period
-    when :ancient then 
-      "старый фильм"
-    when :classic then 
-      "классический фильм"
-    when :modern then 
-      "современное кино"
-    when :new then 
-      "новинка"
-    end
-  end
-   
+  
 end
