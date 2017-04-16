@@ -101,3 +101,7 @@ theatre = Theatre.new(@films)
 puts "theatre.show(10)"
 theatre.show(13).first(4).each{ |f| puts "\t #{f}" }
 puts ".........." 
+theatre.when? "Double Indemnity"
+theatre.when? "The Prestige"
+theatre.when? "Who's Afraid of Virginia Woolf?"
+theatre.when? "Once Upon a Time in America"
