@@ -12,7 +12,7 @@ class  ModernMovie < Movie
 
   def watch
     @collection.payment(cost) 
-    puts "Оплата просмотра фильма 2 доллара, на счете осталось $#{@collection.deposit}"
+    "Оплата просмотра фильма 2 доллара, на счете осталось $#{@collection.deposit}"
   end
 
 end

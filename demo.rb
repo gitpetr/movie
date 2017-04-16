@@ -9,6 +9,7 @@ require_relative 'classicmovie'
 require_relative 'modernmovie'
 require_relative 'newmovie'
 require_relative 'netflix/netflix'
+require_relative 'theatre/theatre'
 
 MANTH = %i[Январь Февраль Март Апрель Май Июнь Июль Август Сентябрь Октябрь Ноябрь Декабрь]
 
@@ -58,13 +59,10 @@ puts listfilms.genries
 puts
 puts "\t - Фильтр: listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, director: /Zemeckis Robert|Cameron James/ )"
 listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| print f.to_s }
-
 puts 
-
-
-puts "showfilm.show.first(5).each{ |f| print f }\n"
 netflix = Netflix.new(@films)
-netflix.show(genre: 'Comedy', period: :classic) 
+puts "netflix.show"
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new).each{ |f| f} 
 puts 
 puts
 netflix.pay(10)
@@ -89,9 +87,17 @@ end
 puts 
 netflix.pay(1)
 begin
-puts "netflix.how_much?(/Double Indemnity/)"
+puts "netflix.how_much?('Double Indemnity')"
 netflix.how_much?(/Double Indemnity/)
-netflix.watch(/Double Indemnity/) 
+netflix.watch("Double Indemnity")
+puts "netflix.how_much?('Double Indemnity')" 
+netflix.how_much?("Double Indemnity")
 rescue RuntimeError => e 
   puts "\t\t #{e.message}" 
 end
+puts 
+puts  
+theatre = Theatre.new(@films)
+puts "theatre.show(10)"
+theatre.show(13).each{ |f| print f}
+puts ".........." 

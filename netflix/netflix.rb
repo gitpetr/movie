@@ -1,4 +1,3 @@
-# require '../movie_collection.rb'
 class Netflix < MovieCollection
   attr_reader :deposit
 
@@ -27,16 +26,20 @@ class Netflix < MovieCollection
       filters.delete(:period)
     end
     
-    filter(filters).each{|f| print f.film}
+    filter(filters).each{|f| print f.film.to_s}
 
   end
 
   def watch(film)
-    filter(name: film).each{ |f| print f.film; f.watch }
+    filter(name: film).each{ |f| puts f.watch, f.film }
   end
 
   def how_much?(film)
     filter(name: film).each{ |f| puts "просмотр фильма стоит $#{f.cost}, на вашем счете   $#{@deposit}" }
+  end
+
+  def to_s
+    ''
   end
 
 end
