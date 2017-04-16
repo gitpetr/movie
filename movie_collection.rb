@@ -50,9 +50,5 @@ class MovieCollection
   def filter(filters) 
     @allfilms.select{ |f| f.match_filter?(filters) } 
   end
-
-  def alls
-    @allfilm
-  end
   
 end

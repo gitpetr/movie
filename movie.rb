@@ -15,15 +15,13 @@ class Movie
     @collection = owner 
   end
 
-
-
   def has_genre? genre 
-     raise  "Извините! Вы ошиблись, такого жанра нет" unless @collection.genries.include?(genre)
+     raise "Извините! Вы ошиблись, такого жанра нет" unless @collection.genries.include?(genre)
      @genre.include?(genre)
   end
 
   def to_s 
-   print "\t #{ @name }: #{ @director } ( #{ @year }, #{ @genre.join('/') } - #{ @duratation }). \n\b"
+   "\t #{ @name }: #{ @director } ( #{ @year }, #{ @genre.join('/') } - #{ @duratation }). \n\b"
   end
   
   def month

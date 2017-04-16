@@ -8,7 +8,7 @@ require_relative 'ancientmovie'
 require_relative 'classicmovie'
 require_relative 'modernmovie'
 require_relative 'newmovie'
-
+require_relative 'netflix/netflix'
 
 MANTH = %i[Январь Февраль Март Апрель Май Июнь Июль Август Сентябрь Октябрь Ноябрь Декабрь]
 
@@ -16,10 +16,10 @@ MANTH = %i[Январь Февраль Март Апрель Май Июнь И�
 listfilms =  MovieCollection.new(@films)
 
 puts "\t - Список всех фильмов(listfilms.all)"
-listfilms.all.first(5).each{|f| f.to_s }
+listfilms.all.first(5).each{|f| print f.to_s }
 puts
 puts "\t - Список фильмов.(listfilms.sortby(:year)) Показаны названия первых пяти "
-listfilms.sortby(:year).first(5).each{|f| f.to_s } 
+listfilms.sortby(:year).first(5).each{|f| print f.to_s } 
 puts
 puts "\t - Список актеров ( [6] )"
 print "\t ", listfilms.actors[6]  
@@ -49,13 +49,49 @@ puts "\t listfilms.all[3].has_genre? 'Drama'"
 puts (listfilms.all[3].has_genre? 'Drama')?  "\t Yes" : "\t No"
 puts "\t Если ошиблись с жанром listfilms.all[3].has_genre? 'Boevik'"
 puts (listfilms.all[3].has_genre? 'Boevik')?  "\t Yes" : "\t No"
-rescue Exception => e 
+rescue RuntimeError => e 
   puts "\t\t #{e.message}"
 end
 puts
 puts "\t - Список жанров"
 puts listfilms.genries
 puts
-puts "\t - Фильтр: listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy/, director: /Zemeckis Robert|Cameron James/ )"
-listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| f.to_s }
- 
+puts "\t - Фильтр: listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, director: /Zemeckis Robert|Cameron James/ )"
+listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| print f.to_s }
+
+puts 
+
+
+puts "showfilm.show.first(5).each{ |f| print f }\n"
+netflix = Netflix.new(@films)
+netflix.show(genre: 'Comedy', period: :classic) 
+puts 
+puts
+netflix.pay(10)
+begin
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/) 
+netflix.watch(/Double Indemnity/)
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}"
+end
+puts 
+netflix.pay(1)
+begin
+puts "netflix.how_much?(/Double Indemnity/)"
+netflix.how_much?(/Double Indemnity/)
+netflix.watch(/Double Indemnity/) 
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
