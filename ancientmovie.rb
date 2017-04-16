@@ -5,7 +5,7 @@ class AncientMovie < Movie
   end 
 
   def film
-   "\t #{ @name } - старый фильм ( #{ @year }, - #{ @duratation }). \n\b"
+   " #{ @name } - старый фильм ( #{ @year }, - #{ @duratation }). "
   end
 
   def watch

@@ -4,8 +4,7 @@ class NewMovie < Movie
   end 
    
   def film
-    puts @collection
-    "\t #{ @name } - новинка вышло #{ Time.now.year - @year } лет назад. ( #{ @year }, - #{ @duratation }). \n\b"
+    " #{ @name } - новинка вышло #{ Time.now.year - @year } лет назад. ( #{ @year }, - #{ @duratation }). "
   end
 
   def watch

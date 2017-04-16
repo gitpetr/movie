@@ -17,10 +17,10 @@ MANTH = %i[Январь Февраль Март Апрель Май Июнь И�
 listfilms =  MovieCollection.new(@films)
 
 puts "\t - Список всех фильмов(listfilms.all)"
-listfilms.all.first(5).each{|f| print f.to_s }
+listfilms.all.first(2).each{|f| puts f }
 puts
 puts "\t - Список фильмов.(listfilms.sortby(:year)) Показаны названия первых пяти "
-listfilms.sortby(:year).first(5).each{|f| print f.to_s } 
+listfilms.sortby(:year).first(5).each{|f| puts f } 
 puts
 puts "\t - Список актеров ( [6] )"
 print "\t ", listfilms.actors[6]  
@@ -58,18 +58,18 @@ puts "\t - Список жанров"
 puts listfilms.genries
 puts
 puts "\t - Фильтр: listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, director: /Zemeckis Robert|Cameron James/ )"
-listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| print f.to_s }
+listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| puts f }
 puts 
 netflix = Netflix.new(@films)
 puts "netflix.show"
-netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new).each{ |f| f} 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic) 
 puts 
 puts
 netflix.pay(10)
 begin
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/) 
+netflix.watch(/The Prestige/) 
+netflix.watch(/Once Upon a Time in America/) 
+netflix.watch(/Who's Afraid of Virginia Woolf?/) 
 netflix.watch(/Double Indemnity/) 
 netflix.watch(/Double Indemnity/) 
 netflix.watch(/Double Indemnity/) 
@@ -99,5 +99,5 @@ puts
 puts  
 theatre = Theatre.new(@films)
 puts "theatre.show(10)"
-theatre.show(13).each{ |f| print f}
+theatre.show(13).first(4).each{ |f| puts "\t #{f}" }
 puts ".........." 

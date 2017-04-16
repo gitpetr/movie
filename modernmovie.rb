@@ -5,9 +5,9 @@ class  ModernMovie < Movie
   end 
 
   def film
-    str = "\t #{ @name } - современное кино ( #{ @year }, - #{ @duratation }). Играют "
+    str = " #{ @name } - современное кино ( #{ @year }, - #{ @duratation }). Играют "
     str += @actors.join(', ')
-    str += "\n\n"
+    str += "."
   end
 
   def watch

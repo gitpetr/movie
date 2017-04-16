@@ -21,7 +21,7 @@ class Movie
   end
 
   def to_s 
-   "\t #{ @name }: #{ @director } ( #{ @year }, #{ @genre.join('/') } - #{ @duratation }). \n\b"
+   " #{ @name }: #{ @director } ( #{ @year }, #{ @genre.join('/') } - #{ @duratation }). Рейтинг(#{@rating}). "
   end
   
   def month

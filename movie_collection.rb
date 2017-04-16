@@ -6,7 +6,8 @@ class MovieCollection
     unless File.exist?(filmfile)  
       abort " Такого файла не существует"
     end
-    @allfilms = CSV.read(filmfile, col_sep: '|', headers: TITRES ).map{ |f| class_for(f.to_h[:year].to_i).new(self, f.to_h) }
+    @allfilms = CSV.read(filmfile, col_sep: '|', headers: TITRES ).map{ |f| class_for(f.to_h[:year].to_i)\
+      .new(self, f.to_h) }.sort_by{|f| f.rating * rand(3) }.reverse
     @genries = genres
   end
 
