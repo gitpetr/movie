@@ -4,10 +4,8 @@ class  ModernMovie < Movie
     2 
   end 
 
-  def film
-    str = " #{ @name } - современное кино ( #{ @year }, - #{ @duratation }). Играют "
-    str += @actors.join(', ')
-    str += "."
+  def description
+    format(" %s - современное кино ( %s, - %s). Играют %s .",  @name, @year, @duratation, @actors.join(', '))
   end
 
   def watch

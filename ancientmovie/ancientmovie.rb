@@ -1,3 +1,0 @@
-class AncientMovie < Movie
-  #
-end

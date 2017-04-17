@@ -1,16 +1,12 @@
 class Netflix < MovieCollection
-  attr_reader :deposit
-
-  def period 
-    {ancient: 1900..1945, classic: 1946..1968, modern: 1969..2000, new: 2001..Time.now.year}
+  attr_accessor :deposit
+  def initialize filmfile 
+    super
+    @deposit = 10
   end
 
   def pay(deposit)
-    if @deposit
       @deposit += deposit
-    else
-      @deposit = deposit
-    end
   end
 
   def payment(cost)
@@ -26,16 +22,16 @@ class Netflix < MovieCollection
       filters.delete(:period)
     end
     
-    filter(filters).first(5).each{|f| puts f.film}
+    filter(filters).sort_by { rand }.first(1).each{|f| puts " Фильм: #{ f.description } #{ f.watch } " }
 
   end
 
   def watch(film)
-    filter(name: film).each{ |f| puts " Фильм: #{f.film} #{f.watch} "}
+    filter(name: film).each{ |f| puts " Фильм: #{ f.description } #{ f.watch } " }
   end
 
   def how_much?(film)
-    filter(name: film).each{ |f| print "#{ f.film } - просмотр фильма стоит $#{ f.cost }, на вашем счете   $#{@deposit} \n" }
+    filter(name: film).each{ |f| print "#{ f.description } - просмотр фильма стоит $#{ f.cost }, на вашем счете   $#{ @deposit } \n" }
   end
 
 end

@@ -1,25 +1,31 @@
 class MovieCollection 
   
   attr_reader :allfilms, :genries
+
+  def period 
+    {ancient: 1900..1945, classic: 1946..1968, modern: 1969..2000, new: 2001..Time.now.year}
+  end
   
   def initialize filmfile
     unless File.exist?(filmfile)  
       abort " Такого файла не существует"
     end
-    @allfilms = CSV.read(filmfile, col_sep: '|', headers: TITRES ).map{ |f| class_for(f.to_h[:year].to_i)\
-      .new(self, f.to_h) }.sort_by{|f| f.rating * rand(3) }.reverse
+    @allfilms = CSV.read(filmfile, col_sep: '|', headers: TITRES )
+      .map{ |f| class_for(f.to_h[:year].to_i).new(self, f.to_h) }
+      .sort_by{|f| f.rating * rand(3) }.reverse
+
     @genries = genres
   end
 
   def class_for year
     case year
-    when (1900..1945) then 
+    when period[:ancient] 
       AncientMovie 
-    when (1945..1968) then 
+    when period[:classic] 
       ClassicMovie 
-    when (1968..2000) then 
+    when period[:modern]
       ModernMovie 
-    when (2000..Time.now.year) then 
+    when period[:new]
       NewMovie 
     end
   end

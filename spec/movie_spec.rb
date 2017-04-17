@@ -1,17 +1,17 @@
 require 'rspec'
 require 'rspec/its'
 require 'csv' 
-require_relative '../movie_collection'
+require_relative '../app/movie_collection'
 TITRES = %i[link name  year country date  genre duratation rating director actors]
-require_relative '../movie'
-require_relative '../ancientmovie'
-require_relative '../classicmovie'
-require_relative '../modernmovie'
-require_relative '../newmovie'
+require_relative '../app/movie'
+require_relative '../app/ancientmovie'
+require_relative '../app/classicmovie'
+require_relative '../app/modernmovie'
+require_relative '../app/newmovie'
 
  
 RSpec.describe MovieCollection  do 
-  let(:listfilms) {  MovieCollection.new("../movies.txt") }
+  let(:listfilms) {  MovieCollection.new("./movies.txt") }
   
   describe '#all' do 
     subject { listfilms.all }

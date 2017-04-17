@@ -2,18 +2,18 @@ require 'csv'
 require 'ostruct'
 require 'date'
 TITRES = %i[link name  year country date  genre duratation rating director actors]
-require_relative 'movie_collection'
-require_relative 'movie'
-require_relative 'ancientmovie'
-require_relative 'classicmovie'
-require_relative 'modernmovie'
-require_relative 'newmovie'
-require_relative 'netflix/netflix'
-require_relative 'theatre/theatre'
+require_relative '../app/movie_collection'
+require_relative '../app/movie'
+require_relative '../app/ancientmovie'
+require_relative '../app/classicmovie'
+require_relative '../app/modernmovie'
+require_relative '../app/newmovie'
+require_relative '../app/netflix/netflix'
+require_relative '../app/theatre/theatre'
 
 MANTH = %i[Январь Февраль Март Апрель Май Июнь Июль Август Сентябрь Октябрь Ноябрь Декабрь]
 
-@films = ARGV[0] || "./movies.txt"
+@films = ARGV[0] || File.expand_path("../../app/movies.txt", __FILE__)
 listfilms =  MovieCollection.new(@films)
 
 puts "\t - Список всех фильмов(listfilms.all)"
@@ -62,46 +62,59 @@ listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, acto
 puts 
 netflix = Netflix.new(@films)
 puts "netflix.show"
-netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic) 
+
 puts 
 puts
 netflix.pay(10)
 begin
-netflix.watch(/The Prestige/) 
-netflix.watch(/Once Upon a Time in America/) 
-netflix.watch(/Who's Afraid of Virginia Woolf?/) 
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/) 
-netflix.watch(/Double Indemnity/)
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :modern)  
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic)
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :ancient) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new)  
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :modern)  
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic)
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :ancient) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new)  
 rescue RuntimeError => e 
   puts "\t\t #{e.message}"
 end
 puts 
-netflix.pay(1)
+netflix.pay(6)
 begin
-puts "netflix.how_much?('Double Indemnity')"
-netflix.how_much?(/Double Indemnity/)
-netflix.watch("Double Indemnity")
-puts "netflix.how_much?('Double Indemnity')" 
-netflix.how_much?("Double Indemnity")
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new)
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new) 
+netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new) 
 rescue RuntimeError => e 
   puts "\t\t #{e.message}" 
 end
+netflix.pay(1.3)
+puts "netflix.how_much?" 
+netflix.how_much?("Gone Girl")
+netflix.how_much?("Double Indemnity")
+netflix.how_much?("Persona") 
+netflix.how_much?("Up") 
+netflix.how_much?("The Great Escape")
 puts 
 puts  
 theatre = Theatre.new(@films)
-puts "theatre.show(10)"
+puts "theatre.show(13)"
 theatre.show(13).first(4).each{ |f| puts "\t #{f}" }
 puts ".........." 
 theatre.when? "Double Indemnity"
 theatre.when? "The Prestige"
 theatre.when? "Who's Afraid of Virginia Woolf?"
 theatre.when? "Once Upon a Time in America"
+theatre.when? "One Flew Over the Cuckoo's Nest"
+theatre.when? "The Lord of the Rings: The Return of the King"
