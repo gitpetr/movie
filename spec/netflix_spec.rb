@@ -5,6 +5,10 @@ require_relative '../movie_collection'
 TITRES = %i[link name  year country date  genre duratation rating director actors]
 require_relative '../movie'
 require_relative '../netflix/netflix'
+require_relative '../ancientmovie'
+require_relative '../classicmovie'
+require_relative '../modernmovie'
+require_relative '../newmovie'
 
 RSpec.describe Netflix do
   let(:netflix) { Netflix.new("../movies.txt") }
@@ -16,4 +20,5 @@ RSpec.describe Netflix do
                                           :genre => ["Drama", "Mystery", "Thriller"],
                                           :actors => ["Christian Bale", "Hugh Jackman", "Scarlett Johansson"]) }
   end
-end
+ 
+  end

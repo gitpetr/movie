@@ -4,6 +4,11 @@ require 'csv'
 require_relative '../movie_collection'
 TITRES = %i[link name  year country date  genre duratation rating director actors]
 require_relative '../movie'
+require_relative '../ancientmovie'
+require_relative '../classicmovie'
+require_relative '../modernmovie'
+require_relative '../newmovie'
+
  
 RSpec.describe MovieCollection  do 
   let(:listfilms) {  MovieCollection.new("../movies.txt") }
@@ -11,7 +16,7 @@ RSpec.describe MovieCollection  do
   describe '#all' do 
     subject { listfilms.all }
     its(:count) { is_expected.to eq(250) }
-    it { is_expected.to all be_an_instance_of(Movie)}
+    it { is_expected.to all be_a(Movie)}
   end
   
   describe "#sortby" do 
