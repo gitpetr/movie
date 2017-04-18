@@ -2,7 +2,6 @@ require 'rspec'
 require 'rspec/its'
 require 'csv' 
 require_relative '../app/movie_collection'
-TITRES = %i[link name  year country date  genre duratation rating director actors]
 require_relative '../app/movie'
 require_relative '../app/ancientmovie'
 require_relative '../app/classicmovie'

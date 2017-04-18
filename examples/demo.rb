@@ -1,7 +1,7 @@
 require 'csv' 
 require 'ostruct'
 require 'date'
-TITRES = %i[link name  year country date  genre duratation rating director actors]
+
 require_relative '../app/movie_collection'
 require_relative '../app/movie'
 require_relative '../app/ancientmovie'

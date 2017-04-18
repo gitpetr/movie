@@ -1,4 +1,5 @@
 class Movie
+  TITRES = %i[link name  year country date  genre duratation rating director actors]
   attr_reader *TITRES
  
   def initialize(owner, film)
