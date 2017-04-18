@@ -1,8 +1,8 @@
 class Netflix < MovieCollection
   attr_reader :deposit
-  def initialize filmfile, firstpay 
+  def initialize filmfile
     super
-    @deposit = firstpay
+    @deposit = 0
   end
 
   def pay(deposit)
@@ -26,9 +26,9 @@ class Netflix < MovieCollection
 
   end
 
-  def watch(film)
-    filter(name: film).each{ |f| puts " Фильм: #{ f.description } #{ f.watch } " }
-  end
+  # def watch(film)
+  #   filter(name: film).each{ |f| puts " Фильм: #{ f.description } #{ f.watch } " }
+  # end
 
   def how_much?(film)
     filter(name: film).each{ |f| print "#{ f.description } - просмотр фильма стоит $#{ f.cost }, на вашем счете   $#{ @deposit } \n" }

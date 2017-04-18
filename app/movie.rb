@@ -33,5 +33,10 @@ class Movie
       field = self.send(k)
       field.is_a?(Array) ?  field.any?{ |acter| v === acter } : v ===  field }
   end
+
+  def watch
+    @collection.payment(cost) 
+    "Оплата просмотра фильма  #{self.cost} доллара на счете осталось $#{@collection.deposit}"
+  end
  
 end

@@ -60,12 +60,12 @@ puts
 puts "\t - Фильтр: listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, director: /Zemeckis Robert|Cameron James/ )"
 listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| puts f }
 puts 
-netflix = Netflix.new(@films, 8)
+netflix = Netflix.new(@films)
 puts "netflix.show"
 
 puts 
 puts
-netflix.pay(10)
+netflix.pay(18)
 begin
 netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :modern)  
 netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic)

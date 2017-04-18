@@ -6,7 +6,7 @@ class MovieCollection
     {ancient: 1900..1945, classic: 1946..1968, modern: 1969..2000, new: 2001..Time.now.year}
   end
   
-  def initialize filmfile,  firstpay=nil
+  def initialize filmfile 
     unless File.exist?(filmfile)  
       abort " Такого файла не существует"
     end

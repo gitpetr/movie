@@ -9,9 +9,8 @@ require_relative '../app/classicmovie'
 require_relative '../app/modernmovie'
 require_relative '../app/newmovie'
 
- 
 RSpec.describe MovieCollection  do 
-  let(:listfilms) {  MovieCollection.new("./movies.txt") }
+  let(:listfilms) {  MovieCollection.new(File.expand_path("../../app/movies.txt", __FILE__)) }
   
   describe '#all' do 
     subject { listfilms.all }
