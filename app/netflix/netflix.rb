@@ -1,8 +1,8 @@
 class Netflix < MovieCollection
-  attr_accessor :deposit
-  def initialize filmfile 
+  attr_reader :deposit
+  def initialize filmfile, firstpay 
     super
-    @deposit = 10
+    @deposit = firstpay
   end
 
   def pay(deposit)
