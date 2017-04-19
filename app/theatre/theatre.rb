@@ -21,12 +21,9 @@ class Theatre < MovieCollection
   }
 
   def show(hour)
-    if (9..24) === hour 
-      period = TIMES.detect{ |p, hours| hours.cover?(hour) }[0]  
-      filter(FILTRES[period]).each{ |f| f.description }
-    else 
-     ["В указанное время сеансов нет \n"]
-    end
+    raise "В указанное время сеансов нет \n" unless (MORNING.first..EVENING.last).cover?(hour)
+    period = TIMES.detect{ |p, hours| hours.cover?(hour) }[0]  
+    filter(FILTRES[period]).each{ |f| f.description }
   end
 
   def when? filmname

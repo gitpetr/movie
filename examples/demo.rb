@@ -105,6 +105,7 @@ netflix.how_much?("The Great Escape")
 puts 
 puts  
 theatre = Theatre.new(@films)
+begin 
 puts "theatre.show(13)"
 theatre.show(13).first(4).each{ |f| puts "\t #{f}" }
 puts "theatre.show(22)"
@@ -113,6 +114,9 @@ puts "theatre.show(14)"
 theatre.show(14).first(4).each{ |f| puts "\t #{f}" }
 puts "theatre.show(2)"
 theatre.show(2).first(4).each{ |f| puts "\t #{f}" }
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
 puts "theatre.when?" 
 theatre.when? "Double Indemnity"
 theatre.when? "The Prestige"
