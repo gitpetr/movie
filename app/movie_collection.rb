@@ -1,11 +1,7 @@
 class MovieCollection 
-  
   attr_reader :allfilms, :genries, :period
-
-  def period 
-    {ancient: 1900..1945, classic: 1946..1968, modern: 1969..2000, new: 2001..Time.now.year}
-  end
-
+  PERIODS = {ancient: 1900..1945, classic: 1946..1968, modern: 1969..2000, new: 2001..Time.now.year}
+ 
   def initialize filmfile 
     unless File.exist?(filmfile)  
       abort " Такого файла не существует"
@@ -15,18 +11,17 @@ class MovieCollection
       .sort_by{|f| f.rating * rand(3) }.reverse
 
     @genries = genres
-    @period = period
   end
-  
+
   def class_for year
     case year
-    when period[:ancient] 
+    when PERIODS[:ancient] 
       AncientMovie 
-    when period[:classic] 
+    when PERIODS[:classic] 
       ClassicMovie 
-    when period[:modern]
+    when PERIODS[:modern]
       ModernMovie 
-    when period[:new]
+    when PERIODS[:new]
       NewMovie 
     end
   end

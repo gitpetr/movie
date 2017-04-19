@@ -7,5 +7,4 @@ class  ModernMovie < Movie
   def description
     format(" %s - современное кино ( %s, - %s). Играют %s .",  @name, @year, @duratation, @actors.join(', '))
   end
- 
 end

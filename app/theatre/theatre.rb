@@ -1,36 +1,34 @@
 class Theatre < MovieCollection
-  Morning = (9..13)
-  Day = (14..18) 
-  Evening = (19..24) 
+  MORNING = (9..13)
+  DAY = (14..18) 
+  EVENING = (19..24) 
+  MORNING_SEANS = PERIODS[:ancient]
+  DAY_SEANS = /Adventure|Comedy/
+  EVENING_SEANS = /Drama|Horror/
+  FILTERDAY = { genre: DAY_SEANS }
+  FILTEREVENING = { genre: EVENING_SEANS }
+  FILTERMORNING =  { year: PERIODS[:ancient]  }
 
-  Day_seans = /Adventure|Comedy/
-  Evening_seans = /Drama|Horror/
-
-  FilterDey = { genre: Day_seans }
-  FilterEvening = { genre: Evening_seans }
-  # FilterMorning = { year: @period[:ancient] }
   def show(filters)
-    if  Morning === filters 
-      filter(year: period[:ancient]).each{ |f| f.description }
-    elsif Day === filters
-      filter(FilterDey).each{ |f| f.description }
-    elsif Evening === filters
-      filter(FilterEvening).each{ |f| f.description }
+    if  MORNING === filters 
+      filter(FILTERMORNING).each{ |f| f.description }
+    elsif DAY === filters
+      filter(FILTERDAY).each{ |f| f.description }
+    elsif EVENING === filters
+      filter(FILTEREVENING).each{ |f| f.description }
     else 
      ["В указанное время сеансов нет \n"]
     end
-    
   end
 
   def when? filmname
     filter(name: filmname).each do |f|
-
-      if period[:ancient] === f.year
-        puts "Сеансы фильма: #{ f.description } идут  c #{ Morning.first } по #{ Morning.last } " 
-      elsif  (Day_seans === f.genre.to_s) 
-        puts "Сеансы фильма: #{ f.description } идут с #{ Day.first } по #{ Day.last } "
-      elsif (Evening_seans === f.genre.to_s) 
-        puts "Сеансы фильма: #{ f.description } идут с #{ Evening.first } по #{ Evening.last } "
+      if MORNING_SEANS === f.year
+        puts "Сеансы фильма: #{ f.description } идут  c #{ MORNING.first } по #{ MORNING.last } " 
+      elsif  DAY_SEANS === f.genre.to_s
+        puts "Сеансы фильма: #{ f.description } идут с #{ DAY.first } по #{ DAY.last } "
+      elsif EVENING_SEANS === f.genre.to_s 
+        puts "Сеансы фильма: #{ f.description } идут с #{ EVENING.first } по #{ EVENING.last } "
       else
         puts "Такого сеанса в настоящее время нет"
       end

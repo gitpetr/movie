@@ -1,5 +1,6 @@
 class Netflix < MovieCollection
   attr_reader :deposit
+  
   def initialize filmfile
     super
     @deposit = 0
@@ -15,19 +16,15 @@ class Netflix < MovieCollection
   end 
    
   def show(filters)
-
     if filters[:period]
-      filters[:year] = period[filters[:period]]
-      period = filters[:period]
+      filters[:year] =  PERIODS[:period]
       filters.delete(:period)
     end
     
     filter(filters).sort_by{ |f|  f.rating.to_i * rand(10) }.reverse.first(1).each{|f| puts " Фильм: #{ f.description } #{ f.watch } " }
-
   end
 
   def how_much?(film)
     filter(name: film).each{ |f| print "#{ f.description } - просмотр фильма стоит $#{ f.cost }, на вашем счете   $#{ @deposit } \n" }
   end
-
 end

@@ -1,7 +1,6 @@
 require 'csv' 
 require 'ostruct'
 require 'date'
-
 require_relative '../app/movie_collection'
 require_relative '../app/movie'
 require_relative '../app/ancientmovie'
@@ -61,10 +60,7 @@ puts "\t - Фильтр: listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Co
 listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| puts f }
 puts 
 netflix = Netflix.new(@films)
-puts "netflix.show"
-
-puts 
-puts
+puts "Netflix.new"
 netflix.pay(18)
 begin
 netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :modern)  
@@ -111,7 +107,9 @@ puts
 theatre = Theatre.new(@films)
 puts "theatre.show(13)"
 theatre.show(13).first(4).each{ |f| puts "\t #{f}" }
-puts ".........." 
+puts "theatre.show(9)"
+theatre.show(9).first(4).each{ |f| puts "\t #{f}" }
+puts "theatre.when?" 
 theatre.when? "Double Indemnity"
 theatre.when? "The Prestige"
 theatre.when? "Who's Afraid of Virginia Woolf?"

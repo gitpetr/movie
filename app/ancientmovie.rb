@@ -7,5 +7,4 @@ class AncientMovie < Movie
   def description
    " #{ @name } - старый фильм ( #{ @year }, - #{ @duratation }). "
   end
- 
 end
