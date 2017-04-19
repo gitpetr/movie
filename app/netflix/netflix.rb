@@ -22,13 +22,9 @@ class Netflix < MovieCollection
       filters.delete(:period)
     end
     
-    filter(filters).sort_by { rand }.first(1).each{|f| puts " Фильм: #{ f.description } #{ f.watch } " }
+    filter(filters).sort_by{ |f|  f.rating.to_i * rand(10) }.reverse.first(1).each{|f| puts " Фильм: #{ f.description } #{ f.watch } " }
 
   end
-
-  # def watch(film)
-  #   filter(name: film).each{ |f| puts " Фильм: #{ f.description } #{ f.watch } " }
-  # end
 
   def how_much?(film)
     filter(name: film).each{ |f| print "#{ f.description } - просмотр фильма стоит $#{ f.cost }, на вашем счете   $#{ @deposit } \n" }

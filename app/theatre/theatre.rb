@@ -1,25 +1,21 @@
 class Theatre < MovieCollection
- 
   Morning = (9..13)
   Day = (14..18) 
   Evening = (19..24) 
 
-  def day_seans
-    /Adventure|Comedy/
-  end
+  Day_seans = /Adventure|Comedy/
+  Evening_seans = /Drama|Horror/
 
-  def evening_seans 
-    /Drama|Horror/
-  end
- 
+  FilterDey = { genre: Day_seans }
+  FilterEvening = { genre: Evening_seans }
+  # FilterMorning = { year: @period[:ancient] }
   def show(filters)
-
     if  Morning === filters 
       filter(year: period[:ancient]).each{ |f| f.description }
     elsif Day === filters
-      filter(genre: day_seans).each{ |f| f.description }
+      filter(FilterDey).each{ |f| f.description }
     elsif Evening === filters
-       filter(genre: evening_seans).each{ |f| f.description }
+      filter(FilterEvening).each{ |f| f.description }
     else 
      ["В указанное время сеансов нет \n"]
     end
@@ -31,9 +27,9 @@ class Theatre < MovieCollection
 
       if period[:ancient] === f.year
         puts "Сеансы фильма: #{ f.description } идут  c #{ Morning.first } по #{ Morning.last } " 
-      elsif  (day_seans === f.genre.to_s) 
+      elsif  (Day_seans === f.genre.to_s) 
         puts "Сеансы фильма: #{ f.description } идут с #{ Day.first } по #{ Day.last } "
-      elsif (evening_seans === f.genre.to_s) 
+      elsif (Evening_seans === f.genre.to_s) 
         puts "Сеансы фильма: #{ f.description } идут с #{ Evening.first } по #{ Evening.last } "
       else
         puts "Такого сеанса в настоящее время нет"

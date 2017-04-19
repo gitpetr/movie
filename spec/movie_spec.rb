@@ -1,13 +1,3 @@
-require 'rspec'
-require 'rspec/its'
-require 'csv' 
-require_relative '../app/movie_collection'
-require_relative '../app/movie'
-require_relative '../app/ancientmovie'
-require_relative '../app/classicmovie'
-require_relative '../app/modernmovie'
-require_relative '../app/newmovie'
-
 RSpec.describe MovieCollection  do 
   let(:listfilms) {  MovieCollection.new(File.expand_path("../../app/movies.txt", __FILE__)) }
   

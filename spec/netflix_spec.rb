@@ -1,14 +1,3 @@
-require 'rspec'
-require 'rspec/its'
-require 'csv' 
-require_relative '../app/movie_collection'
-require_relative '../app/movie'
-require_relative '../app/netflix/netflix'
-require_relative '../app/ancientmovie'
-require_relative '../app/classicmovie'
-require_relative '../app/modernmovie'
-require_relative '../app/newmovie'
-
 RSpec.describe Netflix do
   let(:netflix) { Netflix.new(File.expand_path("../../app/movies.txt", __FILE__)) }
   before{ netflix.pay(18) }
