@@ -107,8 +107,12 @@ puts
 theatre = Theatre.new(@films)
 puts "theatre.show(13)"
 theatre.show(13).first(4).each{ |f| puts "\t #{f}" }
-puts "theatre.show(9)"
-theatre.show(9).first(4).each{ |f| puts "\t #{f}" }
+puts "theatre.show(22)"
+theatre.show(22).first(4).each{ |f| puts "\t #{f}" }
+puts "theatre.show(14)"
+theatre.show(14).first(4).each{ |f| puts "\t #{f}" }
+puts "theatre.show(2)"
+theatre.show(2).first(4).each{ |f| puts "\t #{f}" }
 puts "theatre.when?" 
 theatre.when? "Double Indemnity"
 theatre.when? "The Prestige"

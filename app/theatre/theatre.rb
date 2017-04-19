@@ -8,14 +8,21 @@ class Theatre < MovieCollection
   FILTERDAY = { genre: DAY_SEANS }
   FILTEREVENING = { genre: EVENING_SEANS }
   FILTERMORNING =  { year: PERIODS[:ancient]  }
+  TIMES = {
+    morning: MORNING,
+    day: DAY,
+    evening: EVENING
+  }
+
+  FILTRES = {
+    morning: FILTERMORNING,
+    day: FILTERDAY,
+    evening: FILTEREVENING  
+  }
 
   def show(filters)
-    if  MORNING === filters 
-      filter(FILTERMORNING).each{ |f| f.description }
-    elsif DAY === filters
-      filter(FILTERDAY).each{ |f| f.description }
-    elsif EVENING === filters
-      filter(FILTEREVENING).each{ |f| f.description }
+    if (9..24) === filters 
+      filter(FILTRES[TIMES.map{ |k, v| k if  v === filters }.compact[0]]).each{ |f| f.description } 
     else 
      ["В указанное время сеансов нет \n"]
     end
