@@ -20,9 +20,10 @@ class Theatre < MovieCollection
     evening: FILTEREVENING  
   }
 
-  def show(filters)
-    if (9..24) === filters 
-      filter(FILTRES[TIMES.map{ |k, v| k if  v === filters }.compact[0]]).each{ |f| f.description } 
+  def show(hour)
+    if (9..24) === hour 
+      period = TIMES.detect{ |p, hours| hours.cover?(hour) }[0]  
+      filter(FILTRES[period]).each{ |f| f.description }
     else 
      ["В указанное время сеансов нет \n"]
     end
