@@ -14,13 +14,12 @@ class Netflix < MovieCollection
     raise "Извините! У вас недостаточно средств на счете" unless  (@deposit-cost) >= 0
     @deposit-=cost
   end 
-   
+
   def show(filters)
     if filters[:period]
-      filters[:year] =  PERIODS[:period]
+      filters[:year] = PERIODS[filters[:period]]
       filters.delete(:period)
     end
-    
     filter(filters).sort_by{ |f|  f.rating.to_i * rand(10) }.reverse.first(1).each{|f| puts " Фильм: #{ f.description } #{ f.watch } " }
   end
 

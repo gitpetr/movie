@@ -62,6 +62,7 @@ puts
 netflix = Netflix.new(@films)
 puts "Netflix.new"
 netflix.pay(18)
+puts "Netflix.show"
 begin
 netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :modern)  
 netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic)
