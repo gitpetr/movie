@@ -35,7 +35,7 @@ class Theatre < MovieCollection
       elsif EVENING_SEANS === f.genre.to_s 
         puts "Сеансы фильма: #{ f.description } идут с #{ EVENING.first } по #{ EVENING.last } "
       else
-        puts "Такого сеанса в настоящее время нет"
+        raise "Такого сеанса в настоящее время нет"
       end
     end
   end

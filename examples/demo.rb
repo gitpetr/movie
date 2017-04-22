@@ -108,13 +108,13 @@ puts
 theatre = Theatre.new(@films)
 begin 
 puts "theatre.show(13)"
-theatre.show(13).first(4).each{ |f| puts "\t #{f}" }
+theatre.show(13).sort_by{ |f|  f.rating.to_i * rand(20) }.reverse.first(4).each{ |f| puts "\t #{f}" }
 puts "theatre.show(22)"
-theatre.show(22).first(4).each{ |f| puts "\t #{f}" }
+theatre.show(22).sort_by{ |f|  f.rating.to_i * rand(20) }.reverse.first(4).each{ |f| puts "\t #{f}" }
 puts "theatre.show(14)"
-theatre.show(14).first(4).each{ |f| puts "\t #{f}" }
+theatre.show(14).sort_by{ |f|  f.rating.to_i * rand(20) }.reverse.first(4).each{ |f| puts "\t #{f}" }
 puts "theatre.show(2)"
-theatre.show(2).first(4).each{ |f| puts "\t #{f}" }
+theatre.show(2).sort_by{ |f|  f.rating.to_i * rand(20) }.reverse.first(4).each{ |f| puts "\t #{f}" }
 rescue RuntimeError => e 
   puts "\t\t #{e.message}" 
 end

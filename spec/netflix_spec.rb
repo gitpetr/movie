@@ -2,12 +2,10 @@ RSpec.describe Netflix do
   let(:netflix) { Netflix.new(File.expand_path("../../app/movies.txt", __FILE__)) }
   before{ netflix.pay(18) }
   describe "#show" do
-    subject {netflix.show( year: (1945..2010),
-                                  genre: /Sci-Fi|Comedy|Romance|Drama/,
-                                  actors: /Johansson|Elizabeth|Julie Delpy/ ) }
-    it { is_expected.to have_attributes(:year => 2006,
-                                          :genre => ["Drama", "Mystery", "Thriller"],
-                                          :actors => ["Christian Bale", "Hugh Jackman", "Scarlett Johansson"]) }
+    
+
+    subject {netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :modern) }
+    it { expect { subject }.to output(/Фильм:(.*)современное кино \( \d{4}, - \d{2,3} min\)\. Играют(.*)Оплата просмотра фильма(.*)на счете осталось \$(\d{2})/).to_stdout }
   end
  
 end
