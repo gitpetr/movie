@@ -52,5 +52,6 @@ RSpec.describe MovieCollection  do
       it { is_expected.to have_attributes(:year => 2006,
                                           :genre => ["Drama", "Mystery", "Thriller"],
                                           :actors => ["Christian Bale", "Hugh Jackman", "Scarlett Johansson"]) }
+       # it { expect { subject }.to output(/(.*)\((.*)/).to_stdout }
   end
 end
