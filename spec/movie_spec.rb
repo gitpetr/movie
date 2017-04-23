@@ -46,12 +46,15 @@ RSpec.describe MovieCollection  do
   end
 
   describe '#filter' do 
-      subject { listfilms.filter( year: (1945..2010),
-                                  genre: /Sci-Fi|Comedy|Romance|Drama/,
-                                  actors: /Johansson|Elizabeth|Julie Delpy/ ).first }
-      it { is_expected.to have_attributes(:year => 2006,
-                                          :genre => ["Drama", "Mystery", "Thriller"],
-                                          :actors => ["Christian Bale", "Hugh Jackman", "Scarlett Johansson"]) }
-       # it { expect { subject }.to output(/(.*)\((.*)/).to_stdout }
+      subject { listfilms.filter( name: "Oldboy",
+                                  year: 2003,
+                                  genre: /Drama/
+       ).first }
+      # it { is_expected.to have_attributes( name: "Oldboy",
+      #                             year: 2003,
+      #                             genre: include('Drama')) }
+      its(:name) { is_expected.to eq "Oldboy" }
+      its(:year) { is_expected.to eq 2003  }
+      its(:genre) { is_expected.to include('Drama')}
   end
 end
