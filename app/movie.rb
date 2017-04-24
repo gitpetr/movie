@@ -1,4 +1,5 @@
 class Movie
+  TITRES = %i[link name  year country date  genre duratation rating director actors]
   attr_reader *TITRES
  
   def initialize(owner, film)
@@ -16,12 +17,12 @@ class Movie
   end
 
   def has_genre? genre 
-     raise  "Извините! Вы ошиблись, такого жанра нет" unless @collection.genries.include?(genre)
+     raise "Извините! Вы ошиблись, такого жанра нет" unless @collection.genries.include?(genre)
      @genre.include?(genre)
   end
 
   def to_s 
-   print "\t #{ @name }: #{ @director } ( #{ @year }, #{ @genre.join('/') } - #{ @duratation }). \n\b"
+   " #{ @name }: #{ @director } ( #{ @year }, #{ @genre.join('/') } - #{ @duratation }). Рейтинг(#{@rating}). "
   end
   
   def month
@@ -33,4 +34,10 @@ class Movie
       field = self.send(k)
       field.is_a?(Array) ?  field.any?{ |acter| v === acter } : v ===  field }
   end
+
+  def watch
+    @collection.payment(cost) 
+    "Оплата просмотра фильма  #{self.cost} доллара на счете осталось $#{@collection.deposit}"
+  end
+ 
 end
