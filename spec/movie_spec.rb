@@ -50,9 +50,7 @@ RSpec.describe MovieCollection  do
                                   year: 2003,
                                   genre: /Drama/
        ).first }
-      # it { is_expected.to have_attributes( name: "Oldboy",
-      #                             year: 2003,
-      #                             genre: include('Drama')) }
+ 
       its(:name) { is_expected.to eq "Oldboy" }
       its(:year) { is_expected.to eq 2003  }
       its(:genre) { is_expected.to include('Drama')}

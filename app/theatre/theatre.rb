@@ -39,4 +39,9 @@ class Theatre < MovieCollection
       end
     end
   end
+
+  def cash
+    CashBox::cashbox
+  end
+
 end

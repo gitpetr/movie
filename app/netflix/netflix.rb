@@ -8,6 +8,7 @@ class Netflix < MovieCollection
 
   def pay(deposit)
       @deposit += deposit
+      CashBox::deposit deposit
   end
 
   def payment(cost)
