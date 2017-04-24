@@ -41,7 +41,7 @@ class Theatre < MovieCollection
   end
 
   def cash
-    CashBox::cashbox
+    puts self.class.cashbox
   end
 
 end

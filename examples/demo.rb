@@ -128,5 +128,21 @@ theatre.when? "Once Upon a Time in America"
 theatre.when? "One Flew Over the Cuckoo's Nest"
 theatre.when? "The Lord of the Rings: The Return of the King"
 puts "............"
+puts "theatre.cash"
 puts theatre.cash
 puts 
+puts "Netflix.take('dengi')"
+begin
+Netflix.take("dengi")
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+puts 'Theatre.take("Bank")'
+begin
+Theatre.take("Bank")
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+
+puts "theatre.cash"
+puts theatre.cash
