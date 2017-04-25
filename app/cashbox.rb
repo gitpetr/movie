@@ -23,7 +23,11 @@ module CashBox
   end
 
   module InstansMethods
-    #
+
+    def pay(deposit)
+      self.class.depo deposit
+    end
+
   end
 
   def self.included base 

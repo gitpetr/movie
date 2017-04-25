@@ -146,3 +146,12 @@ end
 
 puts "theatre.cash"
 puts theatre.cash
+puts 'theatre.buy_ticket "Double Indemnity"'
+theatre.buy_ticket "Double Indemnity"
+theatre.buy_ticket "The Prestige"
+theatre.buy_ticket "Who's Afraid of Virginia Woolf?"
+theatre.buy_ticket "Once Upon a Time in America"
+theatre.buy_ticket "One Flew Over the Cuckoo's Nest"
+theatre.buy_ticket "The Lord of the Rings: The Return of the King"
+puts 'theatre.cash'
+puts theatre.cash
