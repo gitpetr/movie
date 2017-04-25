@@ -7,7 +7,8 @@ class Netflix < MovieCollection
   end
 
   def pay(deposit)
-      @deposit += deposit
+     @deposit += deposit
+     self.class.depo deposit
   end
 
   def payment(cost)

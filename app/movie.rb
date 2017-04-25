@@ -37,6 +37,7 @@ class Movie
 
   def watch
     @collection.payment(cost) 
+     @collection.class.payment(cost) 
     "Оплата просмотра фильма  #{self.cost} доллара на счете осталось $#{@collection.deposit}"
   end
  

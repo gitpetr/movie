@@ -1,7 +1,9 @@
 require 'csv' 
 require 'ostruct'
 require 'date'
+require_relative '../app/cashbox'
 require_relative '../app/movie_collection'
+
 require_relative '../app/movie'
 require_relative '../app/ancientmovie'
 require_relative '../app/classicmovie'
@@ -61,7 +63,7 @@ listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, acto
 puts 
 netflix = Netflix.new(@films)
 puts "Netflix.new"
-netflix.pay(18)
+#netflix.pay(18)
 puts "Netflix.show"
 begin
 netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :modern)  
@@ -125,3 +127,31 @@ theatre.when? "Who's Afraid of Virginia Woolf?"
 theatre.when? "Once Upon a Time in America"
 theatre.when? "One Flew Over the Cuckoo's Nest"
 theatre.when? "The Lord of the Rings: The Return of the King"
+puts "............"
+puts "theatre.cash"
+puts theatre.cash
+puts 
+puts "Netflix.take('dengi')"
+begin
+Netflix.take("dengi")
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+puts 'Theatre.take("Bank")'
+begin
+Theatre.take("Bank")
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+
+puts "theatre.cash"
+puts theatre.cash
+puts 'theatre.buy_ticket "Double Indemnity"'
+theatre.buy_ticket "Double Indemnity"
+theatre.buy_ticket "The Prestige"
+theatre.buy_ticket "Who's Afraid of Virginia Woolf?"
+theatre.buy_ticket "Once Upon a Time in America"
+theatre.buy_ticket "One Flew Over the Cuckoo's Nest"
+theatre.buy_ticket "The Lord of the Rings: The Return of the King"
+puts 'theatre.cash'
+puts theatre.cash
