@@ -1,15 +1,15 @@
 class Netflix < MovieCollection
-  include CashBox::GeneralCash
+  extend CashBox::MovieCash
   attr_reader :deposit
-  
+
   def initialize filmfile
     super
     @deposit = 0
   end
 
   def pay(deposit)
-      @deposit += deposit
-      self.class.deposit_cash deposit
+    @deposit += deposit
+    self.class.addtocash deposit
   end
 
   def payment(cost)

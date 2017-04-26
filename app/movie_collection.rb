@@ -1,9 +1,9 @@
 class MovieCollection 
   require 'money'
   Money.use_i18n = false
-  include CashBox::MovieCash
+  
   attr_reader :allfilms, :genries, :period
-  attr_accessor :cash
+  
   PERIODS = {ancient: 1900..1945, classic: 1946..1968, modern: 1969..2000, new: 2001..Time.now.year}
  
   def initialize filmfile 
@@ -15,7 +15,6 @@ class MovieCollection
       .sort_by{|f| f.rating * rand(3) }.reverse
 
     @genries = genres
-    @cash = 10
   end
 
   def class_for year
