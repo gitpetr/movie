@@ -1,6 +1,7 @@
 require 'csv' 
 require 'ostruct'
 require 'date'
+require_relative '../app/cashbox'
 require_relative '../app/movie_collection'
 require_relative '../app/movie'
 require_relative '../app/ancientmovie'
@@ -125,3 +126,44 @@ theatre.when? "Who's Afraid of Virginia Woolf?"
 theatre.when? "Once Upon a Time in America"
 theatre.when? "One Flew Over the Cuckoo's Nest"
 theatre.when? "The Lord of the Rings: The Return of the King"
+
+puts "qqqqqqqqqqqqqqqqqqqqqqqqqq"
+puts  theatre.cash
+puts netflix.cash
+theatre.buy_ticket "Double Indemnity"
+theatre.buy_ticket "The Prestige"
+theatre.buy_ticket "Who's Afraid of Virginia Woolf?"
+theatre.buy_ticket "Once Upon a Time in America"
+theatre.buy_ticket "One Flew Over the Cuckoo's Nest"
+theatre.buy_ticket "The Lord of the Rings: The Return of the King"
+puts  theatre.cash
+begin 
+theatre.take 'money'
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+puts theatre.cash
+puts netflix.cash
+puts Netflix.cash
+begin 
+netflix.take 'money'
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+puts theatre.cash
+puts netflix.cash
+begin 
+theatre.take  "Bank"
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+puts theatre.cash
+puts netflix.cash
+begin 
+netflix.take  "Bank"
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+puts theatre.cash
+puts netflix.cash
+puts Netflix.cash
