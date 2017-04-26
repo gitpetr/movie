@@ -8,8 +8,7 @@ module CashBox
     end 
 
     def addtocash add
-      @cash ||= 0 
-      @cash += add 
+      @cash = cash + add
     end
 
     def take(who)
