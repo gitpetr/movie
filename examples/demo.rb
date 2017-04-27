@@ -22,7 +22,7 @@ puts
 puts "\t - Список фильмов.(listfilms.sortby(:year)) Показаны названия первых пяти "
 listfilms.sortby(:year).first(5).each{|f| puts f } 
 puts
-puts "\t - Список актеров ( [6] )"
+puts "\t - Список актеров [6] "
 print "\t ", listfilms.actors[6]  
 puts
 puts
@@ -127,15 +127,22 @@ theatre.when? "Once Upon a Time in America"
 theatre.when? "One Flew Over the Cuckoo's Nest"
 theatre.when? "The Lord of the Rings: The Return of the King"
 
-puts "qqqqqqqqqqqqqqqqqqqqqqqqqq"
 puts  theatre.cash
-# puts netflix.cash
 theatre.buy_ticket "Double Indemnity"
+puts 'theatre.cash'
+puts theatre.cash
 theatre.buy_ticket "The Prestige"
 theatre.buy_ticket "Who's Afraid of Virginia Woolf?"
+puts 'theatre.cash'
+puts theatre.cash
 theatre.buy_ticket "Once Upon a Time in America"
+puts 'theatre.cash'
+puts theatre.cash
 theatre.buy_ticket "One Flew Over the Cuckoo's Nest"
+puts 'theatre.cash'
+puts theatre.cash
 theatre.buy_ticket "The Lord of the Rings: The Return of the King"
+puts 'theatre.cash'
 puts  theatre.cash
 
 begin 

@@ -2,19 +2,13 @@ class Netflix < MovieCollection
   extend CashBox::MovieCash
   attr_reader :deposit
 
-  def initialize filmfile
-    super
-    @deposit = 0
-  end
-
   def pay(deposit)
-    @deposit += deposit
     self.class.addtocash deposit
   end
 
   def payment(cost)
-    raise "Извините! У вас недостаточно средств на счете" unless  (@deposit-cost) >= 0
-    @deposit-=cost
+    raise "Извините! У вас недостаточно средств на счете" unless  (self.class.cash - cost) >= 0
+    self.class.addtocash(-cost)
   end 
 
   def show(filters)
@@ -26,6 +20,6 @@ class Netflix < MovieCollection
   end
 
   def how_much?(film)
-    filter(name: film).each{ |f| print "#{ f.description } - просмотр фильма стоит $#{ f.cost }, на вашем счете   $#{ @deposit } \n" }
+    filter(name: film).each{ |f| print "#{ f.description } - просмотр фильма стоит $#{ f.cost }, на вашем счете   $#{ self.class.cash } \n" }
   end
 end
