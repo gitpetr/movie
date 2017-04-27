@@ -1,16 +1,16 @@
-require 'rspec'
-require 'rspec/its'
 require 'csv' 
+require 'ostruct'
+require 'date'
+require 'rspec/its'
 require_relative '../app/cashbox'
 require_relative '../app/movie_collection'
-require_relative '../app/theatre/theatre'
-require_relative '../app/netflix/netflix'
 require_relative '../app/movie'
 require_relative '../app/ancientmovie'
 require_relative '../app/classicmovie'
 require_relative '../app/modernmovie'
 require_relative '../app/newmovie'
- 
+require_relative '../app/netflix/netflix'
+require_relative '../app/theatre/theatre'
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

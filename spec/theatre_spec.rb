@@ -1,5 +1,5 @@
-RSpec.describe Theatre do 
-  let(:theatre) { Theatre.new(File.expand_path("../../app/movies.txt", __FILE__)) }
+RSpec.describe Cinema::Theatre do 
+  let(:theatre) { Cinema::Theatre.new(File.expand_path("../../app/movies.txt", __FILE__)) }
   describe "#show" do
     context "when right" do
       subject { theatre.show(13).each{ |f| puts "\t #{f}" } }
