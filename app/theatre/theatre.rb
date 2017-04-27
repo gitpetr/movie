@@ -21,12 +21,7 @@ class Theatre < MovieCollection
   }
 
   include CashBox::MovieCash
-  attr_accessor :cash
-  def initialize filmfile
-    super 
-    @cash = 0
-  end
-
+ 
   def show(hour)
     raise "В указанное время сеансов нет \n" unless (MORNING.first..EVENING.last).cover?(hour)
     period = TIMES.detect{ |p, hours| hours.cover?(hour) }[0]  
