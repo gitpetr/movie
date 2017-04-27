@@ -20,6 +20,7 @@ class Netflix < MovieCollection
   end
 
   def how_much?(film)
-    filter(name: film).each{ |f| print "#{ f.description } - просмотр фильма стоит $#{ f.cost }, на вашем счете   $#{ self.class.cash } \n" }
+    currency = Money.new(1000, "USD").currency
+    filter(name: film).each{ |f| print "#{ f.description } - просмотр фильма стоит  #{Money.new( 100 * f.cost, "USD")}#{currency.symbol}, на вашем счете #{Money.new( 100 * self.class.cash, "USD")}#{currency.symbol}  \n" }
   end
 end

@@ -36,8 +36,10 @@ class Movie
   end
 
   def watch
+    currency = Money.new(1000, "USD").currency
     @collection.payment(cost) 
-    "Оплата просмотра фильма  #{self.cost} доллара на счете осталось $#{@collection.class.cash}"
+    "Оплата просмотра фильма #{Money.new( 100 * self.cost, "USD")}#{currency.symbol},\
+     на счете осталось #{Money.new( 100 * @collection.class.cash, "USD")}#{currency.symbol}"
   end
  
 end
