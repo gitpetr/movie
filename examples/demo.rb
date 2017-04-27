@@ -14,7 +14,7 @@ require_relative '../app/theatre/theatre'
 MANTH = %i[Январь Февраль Март Апрель Май Июнь Июль Август Сентябрь Октябрь Ноябрь Декабрь]
 
 @films = ARGV[0] || File.expand_path("../../app/movies.txt", __FILE__)
-listfilms =  MovieCollection.new(@films)
+listfilms =  Cinema::MovieCollection.new(@films)
 
 puts "\t - Список всех фильмов(listfilms.all)"
 listfilms.all.first(2).each{|f| puts f }
@@ -60,7 +60,7 @@ puts
 puts "\t - Фильтр: listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, director: /Zemeckis Robert|Cameron James/ )"
 listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| puts f }
 puts 
-netflix = Netflix.new(@films)
+netflix = Cinema::Netflix.new(@films)
 puts "Netflix.new"
 netflix.pay(18)
 puts "Netflix.show"
@@ -106,7 +106,7 @@ netflix.how_much?("Up")
 netflix.how_much?("The Great Escape")
 puts 
 puts  
-theatre = Theatre.new(@films)
+theatre = Cinema::Theatre.new(@films)
 begin 
 puts "theatre.show(13)"
 theatre.show(13).sort_by{ |f|  f.rating.to_i * rand(20) }.reverse.first(4).each{ |f| puts "\t #{f}" }
@@ -152,29 +152,29 @@ rescue RuntimeError => e
 end
 puts theatre.cash
 puts 'Netflix.cash'
-puts Netflix.cash
+puts Cinema::Netflix.cash
 begin 
-Netflix.take 'money'
+Cinema::Netflix.take 'money'
 rescue RuntimeError => e 
   puts "\t\t #{e.message}" 
 end
 puts 'theatre.cash'
 puts theatre.cash
 puts 'Netflix.cash'
-puts Netflix.cash
+puts Cinema::Netflix.cash
 begin 
 theatre.take  "Bank"
 rescue RuntimeError => e 
   puts "\t\t #{e.message}" 
 end
 puts theatre.cash
-puts Netflix.cash
+puts Cinema::Netflix.cash
 begin 
-Netflix.take  "Bank"
+Cinema::Netflix.take  "Bank"
 rescue RuntimeError => e 
   puts "\t\t #{e.message}" 
 end
 puts 'theatre.cash'
 puts theatre.cash
 puts 'Netflix.cash'
-puts Netflix.cash
+puts Cinema::Netflix.cash
