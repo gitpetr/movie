@@ -3,13 +3,19 @@ module Cinema
     extend CashBox::MovieCash
     attr_reader :deposit
 
+    def initialize filmfile
+      super
+      @deposit = 0
+    end
+
     def pay(deposit)
+      @deposit += deposit
       self.class.addtocash deposit
     end
 
     def payment(cost)
-      raise "Извините! У вас недостаточно средств на счете" unless  (self.class.cash - cost) >= 0
-      self.class.addtocash(-cost)
+      raise "Извините! У вас недостаточно средств на счете" unless  (@deposit-cost) >= 0
+      @deposit-=cost
     end 
 
     def show(filters)
@@ -23,7 +29,7 @@ module Cinema
     def how_much?(film)
       currency = Money.new(1000, "USD").currency
       filter(name: film).each{ |f| print "#{ f.description } - просмотр фильма стоит  #{Money.new( 100 * f.cost, "USD")}#{currency.symbol},\
-       на вашем счете #{Money.new( 100 * self.class.cash, "USD")}#{currency.symbol}  \n" }
+       на вашем счете #{Money.new( 100 * @deposit, "USD")}#{currency.symbol}  \n" }
     end
   end
 end
