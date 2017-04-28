@@ -1,5 +1,6 @@
 module Cinema
   class Theatre < MovieCollection
+    include CashBox::MovieCash
     MORNING = (9..13)
     DAY = (14..18) 
     EVENING = (19..24) 
@@ -21,7 +22,7 @@ module Cinema
       evening: FILTEREVENING  
     }
 
-    include CashBox::MovieCash
+    
    
     def show(hour)
       raise "В указанное время сеансов нет \n" unless (MORNING.first..EVENING.last).cover?(hour)

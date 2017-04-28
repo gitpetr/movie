@@ -126,8 +126,9 @@ theatre.when? "Who's Afraid of Virginia Woolf?"
 theatre.when? "Once Upon a Time in America"
 theatre.when? "One Flew Over the Cuckoo's Nest"
 theatre.when? "The Lord of the Rings: The Return of the King"
-
+puts  'theatre.cash'
 puts  theatre.cash
+puts 'theatre.buy_ticket'
 theatre.buy_ticket "Double Indemnity"
 puts 'theatre.cash'
 puts theatre.cash
