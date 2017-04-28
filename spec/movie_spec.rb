@@ -1,10 +1,10 @@
-RSpec.describe MovieCollection  do 
-  let(:listfilms) {  MovieCollection.new(File.expand_path("../../app/movies.txt", __FILE__)) }
+RSpec.describe Cinema::MovieCollection  do 
+  let(:listfilms) {  Cinema::MovieCollection.new(File.expand_path("../../app/movies.txt", __FILE__)) }
   
   describe '#all' do 
     subject { listfilms.all }
     its(:count) { is_expected.to eq(250) }
-    it { is_expected.to all be_a(Movie)}
+    it { is_expected.to all be_a(Cinema::Movie)}
   end
   
   describe "#sortby" do 

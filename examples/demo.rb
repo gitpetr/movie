@@ -1,6 +1,7 @@
 require 'csv' 
 require 'ostruct'
 require 'date'
+require_relative '../app/cashbox'
 require_relative '../app/movie_collection'
 require_relative '../app/movie'
 require_relative '../app/ancientmovie'
@@ -13,7 +14,7 @@ require_relative '../app/theatre/theatre'
 MANTH = %i[Январь Февраль Март Апрель Май Июнь Июль Август Сентябрь Октябрь Ноябрь Декабрь]
 
 @films = ARGV[0] || File.expand_path("../../app/movies.txt", __FILE__)
-listfilms =  MovieCollection.new(@films)
+listfilms =  Cinema::MovieCollection.new(@films)
 
 puts "\t - Список всех фильмов(listfilms.all)"
 listfilms.all.first(2).each{|f| puts f }
@@ -21,7 +22,7 @@ puts
 puts "\t - Список фильмов.(listfilms.sortby(:year)) Показаны названия первых пяти "
 listfilms.sortby(:year).first(5).each{|f| puts f } 
 puts
-puts "\t - Список актеров ( [6] )"
+puts "\t - Список актеров [6] "
 print "\t ", listfilms.actors[6]  
 puts
 puts
@@ -59,7 +60,7 @@ puts
 puts "\t - Фильтр: listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, director: /Zemeckis Robert|Cameron James/ )"
 listfilms.filter( year: (1945..2010), genre: /Sci-Fi|Comedy|Romance|Drama/, actors: /Johansson|Elizabeth|Julie Delpy/ ).first(5).each{ |f| puts f }
 puts 
-netflix = Netflix.new(@films)
+netflix = Cinema::Netflix.new(@films)
 puts "Netflix.new"
 netflix.pay(18)
 puts "Netflix.show"
@@ -105,7 +106,7 @@ netflix.how_much?("Up")
 netflix.how_much?("The Great Escape")
 puts 
 puts  
-theatre = Theatre.new(@films)
+theatre = Cinema::Theatre.new(@films)
 begin 
 puts "theatre.show(13)"
 theatre.show(13).sort_by{ |f|  f.rating.to_i * rand(20) }.reverse.first(4).each{ |f| puts "\t #{f}" }
@@ -125,3 +126,56 @@ theatre.when? "Who's Afraid of Virginia Woolf?"
 theatre.when? "Once Upon a Time in America"
 theatre.when? "One Flew Over the Cuckoo's Nest"
 theatre.when? "The Lord of the Rings: The Return of the King"
+puts  'theatre.cash'
+puts  theatre.cash
+puts 'theatre.buy_ticket'
+theatre.buy_ticket "Double Indemnity"
+puts 'theatre.cash'
+puts theatre.cash
+theatre.buy_ticket "The Prestige"
+theatre.buy_ticket "Who's Afraid of Virginia Woolf?"
+puts 'theatre.cash'
+puts theatre.cash
+theatre.buy_ticket "Once Upon a Time in America"
+puts 'theatre.cash'
+puts theatre.cash
+theatre.buy_ticket "One Flew Over the Cuckoo's Nest"
+puts 'theatre.cash'
+puts theatre.cash
+theatre.buy_ticket "The Lord of the Rings: The Return of the King"
+puts 'theatre.cash'
+puts  theatre.cash
+
+begin 
+theatre.take 'money'
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+puts theatre.cash
+puts 'Netflix.cash'
+puts Cinema::Netflix.cash
+begin 
+Cinema::Netflix.take 'money'
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+puts 'theatre.cash'
+puts theatre.cash
+puts 'Netflix.cash'
+puts Cinema::Netflix.cash
+begin 
+theatre.take  "Bank"
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+puts theatre.cash
+puts Cinema::Netflix.cash
+begin 
+Cinema::Netflix.take  "Bank"
+rescue RuntimeError => e 
+  puts "\t\t #{e.message}" 
+end
+puts 'theatre.cash'
+puts theatre.cash
+puts 'Netflix.cash'
+puts Cinema::Netflix.cash

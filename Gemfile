@@ -6,3 +6,4 @@ gem 'bundler'
 end
 gem 'rack'
 gem 'rspec-its', '~> 1.2'
+gem 'money', '~> 6.9' 
