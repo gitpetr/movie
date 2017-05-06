@@ -1,4 +1,4 @@
-module Cinema 
+module Cinema
   class Netflix < MovieCollection
     extend CashBox::MovieCash
     attr_reader :deposit
@@ -16,7 +16,7 @@ module Cinema
     def payment(cost)
       raise "Извините! У вас недостаточно средств на счете" unless  (@deposit-cost) >= 0
       @deposit-=cost
-    end 
+    end
 
     def show(filters)
       if filters[:period]

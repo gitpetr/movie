@@ -1,0 +1,11 @@
+AllCops:
+  Include:
+    - 'app/**/*'
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'spec/**/*'
+    - 'examples/**/*'
+    - 'app/movies.txt'
+    - 'Gemfile'
