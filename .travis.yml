@@ -2,8 +2,9 @@ language: ruby
 sudo:
   false
 rvm:
-  - 2.3.3p222
-
+  - 2.3.3
+script:
+  - bash check.sh
 install:
   - bundle install
 addons:
