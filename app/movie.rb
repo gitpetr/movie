@@ -1,6 +1,6 @@
 module Cinema
   class Movie
-    TITRES = %i[link name  year country date  genre duratation rating director actors]
+    TITRES = %i[link name year country date genre duratation rating director actors].freeze
     attr_reader *TITRES
 
     def initialize(owner, film)
@@ -17,17 +17,17 @@ module Cinema
       @collection = owner
     end
 
-    def has_genre? genre
-       raise "Извините! Вы ошиблись, такого жанра нет" unless @collection.genries.include?(genre)
-       @genre.include?(genre)
+    def has_genre?(genre)
+      raise 'Извините! Вы ошиблись, такого жанра нет' unless @collection.genries.include?(genre)
+      @genre.include?(genre)
     end
 
     def to_s
-     "#{ @name }: #{ @director } ( #{ @year }, #{ @genre.join('/') } - #{ @duratation }). Рейтинг(#{@rating})."
+      "#{@name}: #{@director} ( #{@year}, #{@genre.join('/')} - #{@duratation}). Рейтинг(#{@rating})."
     end
 
     def month
-      self.date[5..6] if self.date.length == 10
+      date[5..6] if date.length == 10
     end
 
     def match_filter?(**filters)
@@ -36,17 +36,17 @@ module Cinema
         filters.delete(:period)
       end
 
-      filters.all?{ |k, v|
-        field = self.send(k)
-        field.is_a?(Array) ?  field.any?{ |acter| v === acter } : v ===  field }
+      filters.all? do |k, v|
+        field = send(k)
+        field.is_a?(Array) ? field.any? { |acter| v === acter } : v === field
+      end
     end
 
     def watch
-      currency = Money.new(1000, "USD").currency
+      currency = Money.new(1000, 'USD').currency
       @collection.payment(cost)
-      "Оплата просмотра фильма #{Money.new( 100 * self.cost, "USD")}#{currency.symbol}, \
-на счете осталось #{Money.new( 100 * @collection.deposit, "USD")}#{currency.symbol}"
+      "Оплата просмотра фильма #{Money.new(100 * cost, 'USD')}#{currency.symbol}, "\
+      "на счете осталось #{Money.new(100 * @collection.deposit, 'USD')}#{currency.symbol}"
     end
-
   end
 end

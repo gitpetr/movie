@@ -1,6 +1,5 @@
 module Cinema
   class NewMovie < Movie
-
     def cost
       2.5
     end

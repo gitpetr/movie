@@ -13,7 +13,8 @@ RSpec.describe Cinema::Theatre do
   end
 
   describe '#when' do
-    subject { theatre.when? 'Double Indemnity' }
-    it { expect { subject }.to output(/^(.*) - (.*) \( \d{4}, - \d{2,3} min\)\.  идут  c \d{1,2} по \d{1,2} $/).to_stdout }
+    it "theatre.when? 'Double Indemnity'" do
+      expect(theatre.when? 'Double Indemnity').to eq "Сеансы фильма: Double Indemnity - старый фильм ( 1944, - 107 min). идут  c 9 по 13"
+    end
   end
 end

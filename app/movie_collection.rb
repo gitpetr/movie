@@ -5,20 +5,17 @@ module Cinema
 
     attr_reader :allfilms, :genries, :period
 
-    PERIODS = { ancient: 1900..1945, classic: 1946..1968, modern: 1969..2000, new: 2001..Time.now.year }
+    PERIODS = { ancient: 1900..1945, classic: 1946..1968, modern: 1969..2000, new: 2001..Time.now.year }.freeze
 
-    def initialize filmfile
-      unless File.exist?(filmfile)
-        abort " Такого файла не существует"
-      end
-      @allfilms = CSV.read(filmfile, col_sep: '|', headers: Movie::TITRES )
-        .map { |f| class_for(f.to_h[:year].to_i).new(self, f.to_h) }
-        .sort_by { |f| f.rating * rand(3) }.reverse
-
+    def initialize(filmfile)
+      abort 'Такого файла не существует' unless File.exist?(filmfile)
+      @allfilms = CSV.read(filmfile, col_sep: '|', headers: Movie::TITRES)
+                     .map { |f| class_for(f.to_h[:year].to_i).new(self, f.to_h) }
+                     .sort_by { |f| f.rating * rand(3) }.reverse
       @genries = genres
     end
 
-    def class_for year
+    def class_for(year)
       case year
       when PERIODS[:ancient]
         AncientMovie
@@ -40,19 +37,15 @@ module Cinema
     end
 
     def actors
-      @allfilms.map { |f|  f.actors }
+      @allfilms.map(&:actors)
     end
 
     def stats(field)
-      @allfilms.flat_map(&field).compact.inject(Hash.new(0)) { |h, e| h[e]+=1; h }
-    end
-
-    def print_stats k, v
-      "\t#{k.to_s.ljust(15)} #{v}"
+      @allfilms.flat_map(&field).compact.inject(Hash.new(0)) { |h, e| h[e] += 1; h }
     end
 
     def print_stat(field)
-      stats(field).sort_by { |name, count| count }.reverse.map { |name, count| "#{name} : #{count}"}
+      stats(field).sort_by { |_name, count| count }.reverse.map { |name, count| "#{name} : #{count}" }
     end
 
     def genres

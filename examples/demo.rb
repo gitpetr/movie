@@ -181,5 +181,3 @@ puts theatre.cash
 puts 'Netflix.cash'
 puts Cinema::Netflix.cash
 puts "###########"
-
-
