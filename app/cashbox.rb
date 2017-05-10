@@ -14,7 +14,7 @@ module Cinema
 
       def take(who)
         raise RuntimeError, "Попытка взлома кассы. Вызвана полиция." unless who == "Bank"
-        puts "Проведена инкассация. В кассе #{@cash=0} долларов"
+        "Проведена инкассация. В кассе #{@cash=0} долларов"
       end
     end
   end

@@ -1,6 +1,11 @@
 module Cinema
   class Theatre < MovieCollection
     include CashBox::MovieCash
+    def initialize filmfile
+      @cost = 0
+      super filmfile
+    end
+
     MORNING = (9..13)
     DAY = (14..18)
     EVENING = (19..24)
@@ -22,34 +27,38 @@ module Cinema
       evening: FILTEREVENING
     }
 
+    TIMESEANS = {
+      morning: { period: :ancient },
+      day: { genre: /Adventure|Comedy/ },
+      evening: { genre: /Drama|Horror/ }
+    }
+    def cost
+      {
+        morning: 3,
+        day: 5,
+        evening: 10
+      }
+    end
+
     def show(hour)
       raise "В указанное время сеансов нет \n" unless (MORNING.first..EVENING.last).cover?(hour)
       period = TIMES.detect{ |p, hours| hours.cover?(hour) }[0]
       filter(FILTRES[period]).each{ |f| f.description }
     end
 
-    def when? filmname
-      filter(name: filmname).each do |f|
-        if MORNING_SEANS === f.year
-          puts "Сеансы фильма: #{ f.description } идут  c #{ MORNING.first } по #{ MORNING.last } "
-          return 3
-        elsif  DAY_SEANS === f.genre.to_s
-          puts "Сеансы фильма: #{ f.description } идут с #{ DAY.first } по #{ DAY.last } "
-          return 5
-        elsif EVENING_SEANS === f.genre.to_s
-          puts "Сеансы фильма: #{ f.description } идут с #{ EVENING.first } по #{ EVENING.last } "
-          return 10
-        else
-          puts "Такого сеанса в настоящее время нет"
-        end
-      end
+    def when?(filmname)
+      film = filter(name: filmname).first
+      raise "Такого сеанса нет" unless film
+      time = TIMESEANS.detect { | hours, filtres | film.match_filter?(filtres) }[0]
+      @cost = cost[time]
+      "Сеансы фильма: #{ film.description } идут  c #{ TIMES[time].first } по #{ TIMES[time].last }"
     end
 
-    def buy_ticket title
+    def buy_ticket(title)
       currency = Money.new(1000, "USD").currency
-      cost = (when?(title))
-      addtocash cost
-      puts "Оплата #{Money.new( 100 * cost, "USD")}#{currency.symbol} Вы купили билет на #{title}. "
+      when? title
+      addtocash @cost
+      "Оплата #{Money.new( 100 * @cost, "USD")}#{currency.symbol} Вы купили билет на #{title}."
     end
   end
 end
