@@ -18,18 +18,16 @@ module Cinema
       @deposit -= cost
     end
 
-    def show(filters)
+    def show(filters, &block)
       if filters[:period]
         filters[:year] = PERIODS[filters[:period]]
         filters.delete(:period)
       end
-      filter(filters).sort_by { |f| f.rating.to_i * rand(10) }
+      film = filter(filters)
+      film = film.select(&block) if block_given?
+      film.sort_by { |f| f.rating.to_i * rand(10) }
                      .reverse.first(1)
                      .inject([]) { |arr, f| arr << "Фильм: #{f.description} #{f.watch}" }
-    end
-
-    def show_movie &block
-      film = @allfilms.select(&block)
     end
 
     def how_much?(film)

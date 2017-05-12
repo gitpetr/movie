@@ -65,7 +65,11 @@ puts 'Netflix.new'
 netflix.pay(30)
 puts 'Netflix.show'
 begin
-puts netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :modern)
+puts netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/) { |movie|
+                                     movie.name.include?('Terminator') &&
+                                     movie.year > 1945 }
+puts
+puts
 puts netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :classic)
 puts netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :new)
 puts netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :ancient)
@@ -181,9 +185,5 @@ puts theatre.cash
 puts 'Netflix.cash'
 puts Cinema::Netflix.cash
 puts "###########"
-puts listfilms.all.select { |f| f.name.include?('Terminator') }
 puts
-puts netflix.show_movie { |f| f.name.include?('Terminator') }
-puts netflix.show_movie { |movie| !movie.name.include?('Terminator') &&
-                                  movie.genre.include?('Action') &&
-                                  movie.year > 2003 }
+
