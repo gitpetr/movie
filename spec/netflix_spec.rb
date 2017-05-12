@@ -5,6 +5,12 @@ RSpec.describe Cinema::Netflix do
     it "when netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :modern)[0]" do
       expect(netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/, period: :modern)[0]).to match(/Фильм:(.*)\(\d{4}, - \d{2,3} min\)(.*)/)
     end
+
+    it "when add &block" do
+      expect(netflix.show(genre: /Sci-Fi|Comedy|Romance|Drama/) { |movie| movie.name.include?('Terminator') &&
+                                                                          movie.year > 1945 }[0])
+              .to match(/Фильм:(.*)\(\d{4}, - \d{2,3} min\)\. Играют(.*)Оплата просмотра фильма(.*)на счете осталось(.*)/)
+    end
   end
 
   describe '#how_much?' do
