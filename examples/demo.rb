@@ -181,3 +181,9 @@ puts theatre.cash
 puts 'Netflix.cash'
 puts Cinema::Netflix.cash
 puts "###########"
+puts listfilms.all.select { |f| f.name.include?('Terminator') }
+puts
+puts netflix.show_movie { |f| f.name.include?('Terminator') }
+puts netflix.show_movie { |movie| !movie.name.include?('Terminator') &&
+                                  movie.genre.include?('Action') &&
+                                  movie.year > 2003 }

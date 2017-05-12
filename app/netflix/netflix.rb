@@ -28,6 +28,10 @@ module Cinema
                      .inject([]) { |arr, f| arr << "Фильм: #{f.description} #{f.watch}" }
     end
 
+    def show_movie &block
+      film = @allfilms.select(&block)
+    end
+
     def how_much?(film)
       currency = Money.new(1000, 'USD').currency
       film = filter(name: film)[0]
