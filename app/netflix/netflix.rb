@@ -19,17 +19,8 @@ module Cinema
       @deposit -= cost
     end
 
-    def show(filters=nil, &block)
-      if filters
-        if filters[:period]
-          filters[:year] = PERIODS[filters[:period]]
-          filters.delete(:period)
-        end
-        film = filter(filters)
-      end
-
-      film ||= @allfilms
-      film = film.select(&block) if block_given?
+    def show(filters)
+      film = filter(filters)
       film.sort_by { |f| f.rating.to_i * rand(10) }
                      .reverse.first(1)
                      .inject([]) { |arr, f| arr << "Фильм: #{f.description} #{f.watch}" }
@@ -41,6 +32,15 @@ module Cinema
       "#{film.description} - просмотр фильма стоит "\
       "#{Money.new(100 * film.cost, 'USD')}#{currency.symbol}, на вашем счете "\
       "#{Money.new(100 * @deposit, 'USD')}#{currency.symbol}"
+    end
+
+    def filter(filters)
+     if (myfilter =  filters.map { |k, v| k if @myfilter.keys.include?(k) }[0])
+        block = @myfilter[myfilter]
+        @allfilms.select(&block)
+      else
+        super
+      end
     end
 
     def define_filter(filter, &block)

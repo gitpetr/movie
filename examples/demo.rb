@@ -195,14 +195,15 @@ puts
 puts
 netflix.pay(60)
 netflix.define_filter(:new_sci_fi) { |film| film.genre.include?('Sci-Fi') && film.country != 'UK' }
-netflix.define_filter(:new_fi) { |movie| !movie.title.include?('Terminator') && movie.genre.include?('Action') && movie.year > 2003 }
-puts netflix.show(){:new_sci_fi}
+netflix.define_filter(:new_fi) { |movie| !movie.title.include?('Terminator') && movie.genre.include?('Action') && movie.year > 2013 }
 
-puts
-puts
+
 netflix.define_filter(:fi) { |movie|
                                      movie.name.include?('Terminator') &&
                                      movie.year > 1945 }
-puts netflix.show(){:fi}
+# puts
 puts
-puts netflix.show(){:new_fi}
+# puts netflix.show(fi: true)
+
+puts netflix.show(new_sci_fi: true)
+puts netflix.show(new_fi: true)
