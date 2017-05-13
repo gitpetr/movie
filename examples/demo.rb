@@ -186,4 +186,23 @@ puts 'Netflix.cash'
 puts Cinema::Netflix.cash
 puts "###########"
 puts
+# begin
+# netflix.define_filter(:my){ |f| p f }
+# rescue RuntimeError => e
+#     puts "#{e.message}"
+# end
 
+puts
+netflix.pay(60)
+netflix.define_filter(:new_sci_fi) { |film| film.genre.include?('Sci-Fi') && film.country != 'UK' }
+netflix.define_filter(:new_fi) { |movie| !movie.title.include?('Terminator') && movie.genre.include?('Action') && movie.year > 2003 }
+puts netflix.show(){:new_sci_fi}
+
+puts
+puts
+netflix.define_filter(:fi) { |movie|
+                                     movie.name.include?('Terminator') &&
+                                     movie.year > 1945 }
+puts netflix.show(){:fi}
+puts
+puts netflix.show(){:new_fi}
